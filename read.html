@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đọc truyện - Chương 1</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo"><i class="fa-solid fa-cat"></i> Yểm Hử Đông</a>
+        <div class="nav-tools">
+            <button class="btn-tool" onclick="toggleTheme()"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
+        </div>
+    </header>
+
+    <div class="read-wrap">
+        <div class="read-header">
+            <h2>Mùa Đông Ấm Áp Của Em</h2>
+            <h1>Chương 1: Gặp gỡ dưới trời tuyết</h1>
+            <div class="view-count" style="margin-top: 10px;"><i class="fa-solid fa-eye"></i> Lượt xem chương: 5,200</div>
+        </div>
+
+        <div class="reading-settings">
+            <button onclick="changeFontSize(-1)">A- Giảm chữ</button>
+            <button onclick="changeFontSize(1)">A+ Tăng chữ</button>
+        </div>
+
+        <!-- Khung đọc (Chống copy) -->
+        <div class="story-content anti-copy" id="reading-content">
+            <div class="story-paragraph">
+                <p>Gió bấc rít gào bên ngoài khung cửa sổ. Đông vươn tay quấn chặt chiếc khăn len quanh cổ, bước ra khỏi quán cà phê.</p>
+                <div class="inline-comment-btn" onclick="inlineComment()" title="Bình luận"><i class="fa-regular fa-comment-dots"></i></div>
+            </div>
+            <div class="story-paragraph">
+                <p>Ngay tại bậc thềm vương vãi những bông tuyết đầu mùa, cô nhìn thấy một dáng người đang thu mình lại.</p>
+                <div class="inline-comment-btn" onclick="inlineComment()"><i class="fa-regular fa-comment-dots"></i></div>
+            </div>
+        </div>
+
+        <div class="chapter-nav">
+            <button class="btn-nav"><i class="fa-solid fa-arrow-left"></i> C.Trước</button>
+            <a href="profile.html" class="btn-nav" style="background: var(--card-bg); color: var(--primary-color);">Mục Lục</a>
+            <button class="btn-nav">C.Sau <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+
+        <div class="interaction-bar">
+            <div class="interaction-item" onclick="toggleHeart(this)"><i class="fa-solid fa-heart"></i><span>1.2k</span></div>
+            <div class="interaction-item"><i class="fa-solid fa-share-nodes"></i><span>Chia sẻ</span></div>
+        </div>
+
+        <div class="box-section">
+            <h2>Bình luận chương này</h2>
+            <div class="comment-box">
+                <img src="https://api.dicebear.com/6.x/adventurer/svg?seed=Mimi" alt="avatar">
+                <div class="comment-input-area">
+                    <textarea placeholder="Gửi gắm chút yêu thương cho tác giả nha..."></textarea>
+                    <div class="comment-actions">
+                        <button class="btn-upload-img" title="Đính kèm ảnh"><i class="fa-regular fa-image"></i></button>
+                        <button class="btn-send">Gửi bình luận</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
