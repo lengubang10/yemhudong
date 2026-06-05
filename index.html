@@ -3,194 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yểm Hử Đông - Hệ Thống Đọc Truyện Cute</title>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Yểm Hử Đông - Góc Đọc Truyện Cute</title>
+    <!-- Nhúng CSS & Icon -->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<!-- Mặc định gán sẵn lớp light-mode ở đây để CSS nhận diện không bị lỗi -->
-<body class="light-mode">
+<body>
 
-    <!-- 1. THANH MENU TRÊN CÙNG ( NAVBAR ) -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <!-- Menu bên trái chỉ giữ lại Liên hệ, đã xóa Thể loại và Trạng thái -->
-            <div class="nav-left">
-                <div class="dropdown">
-                    <button class="dropbtn">Liên hệ <i class="fas fa-chevron-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#">Facebook</a>
-                        <a href="#">Chính sách</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Tên Web chính giữa -->
-            <div class="logo" onclick="showPage('home-section')">🌿 YỂM HỬ ĐÔNG 🌿</div>
-
-            <!-- Cụm chức năng bên phải -->
-            <div class="nav-right">
-                <button class="btn-bell" onclick="alert('Không có thông báo mới nào~')">
-                    <i class="fas fa-bell"></i>
-                </button>
-                <button id="theme-toggle" class="btn-round"><i class="fas fa-moon"></i></button>
-                
-                <button class="btn-login-outline" onclick="openAuthModal()" id="auth-btn">
-                    <i class="fas fa-user"></i> Đăng nhập
-                </button>
-            </div>
+    <!-- HEADER GIAO DIỆN -->
+    <header>
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-cat"></i> Yểm Hử Đông
+        </a>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm tên truyện, thể loại...">
+            <i class="fa-solid fa-search"></i>
         </div>
-    </nav>
-
-    <!-- 2. THANH CHẠY CHỮ THÔNG BÁO (Loa màu xanh dương #8FBDF4) -->
-    <div class="announcement-banner">
-        <div class="announcement-tag"><i class="fas fa-bullhorn"></i> THÔNG BÁO</div>
-        <div class="announcement-text">
-            <marquee behavior="scroll" direction="left" scrollamount="5">
-                Xin chào những dấu chân vô tình dừng lại trước bậu cửa nhuốm màu thời gian của Yểm Hử Đông.
-            </marquee>
+        <div class="nav-tools">
+            <button class="btn-tool" onclick="toggleTheme()" title="Sáng/Tối"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
+            <button class="btn-tool" title="Tủ truyện của tôi"><i class="fa-solid fa-book-bookmark"></i></button>
+            <button class="btn-login">Đăng nhập</button>
         </div>
-    </div>
+    </header>
 
-    <!-- ==========================================
-         PHẦN A: GIAO DIỆN TRANG CHỦ (HOME)
-         ========================================== -->
-    <section id="home-section" class="page-section active">
-        <!-- Ô Tìm kiếm to rõ ràng -->
-        <div class="hero-search">
-            <div class="search-box">
-                <i class="fas fa-search"></i>
-                <input type="text" id="search-input" placeholder="Nhập tên truyện hoặc thể loại cần tìm...">
-            </div>
-            
-            <!-- Bộ lọc tag nhanh giữ lại dưới này để tìm kiếm tiện hơn -->
-            <div class="tags-scroll">
-                <span class="tag active" onclick="filterGenre('all')">Tất cả</span>
-                <span class="tag" onclick="filterGenre('Danmei')">Danmei</span>
-                <span class="tag" onclick="filterGenre('Fantasy')">Fantasy</span>
-                <span class="tag" onclick="filterGenre('ABO')">ABO</span>
-                <span class="tag" onclick="filterGenre('Cổ Phong')">Cổ Phong</span>
-            </div>
-        </div>
+    <!-- KHU VỰC DANH SÁCH TRUYỆN -->
+    <div class="main-container">
+        <h2 class="section-title"><i class="fa-solid fa-star"></i> Truyện Mới Cập Nhật</h2>
+        
+        <div class="story-grid">
+            <!-- Thẻ truyện 1 (Bấm vào sẽ sang trang profile.html) -->
+            <a href="profile.html" class="story-card">
+                <img src="https://i.pinimg.com/736x/21/df/b2/21dfb2c86b2de5d1d6a7edc1e793ea5e.jpg" alt="Bìa truyện">
+                <h3>Mùa Đông Ấm Áp Của Em</h3>
+                <p>Ngôn Tình, Chữa Lành</p>
+            </a>
 
-        <!-- Danh sách truyện chia ô lưới ngăn nắp -->
-        <main class="main-content">
-            <h3 class="section-title"><i class="fas fa-star" style="color: #f1c40f;"></i> Danh Sách Truyện Đề Cử</h3>
-            <div class="story-grid">
-                <!-- Truyện 1 -->
-                <div class="story-card" data-genre="Fantasy ABO" onclick="openStory('Yểm Hử Đông Truyện Ký')">
-                    <div class="card-cover">
-                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=400" alt="Bìa">
-                        <span class="card-badge hot">Hot</span>
-                    </div>
-                    <div class="card-info">
-                        <h4>Yểm Hử Đông Truyện Ký</h4>
-                        <p>Chương 120 • Hoàn thành</p>
-                        <span class="mini-tag">Fantasy</span>
-                    </div>
-                </div>
-                <!-- Truyện 2 -->
-                <div class="story-card" data-genre="Danmei Hiện Đại" onclick="openStory('Tình Yêu Màu Xanh Pastel')">
-                    <div class="card-cover">
-                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400" alt="Bìa">
-                        <span class="card-badge new">Mới</span>
-                    </div>
-                    <div class="card-info">
-                        <h4>Tình Yêu Màu Xanh Pastel</h4>
-                        <p>Chương 45 • Đang ra</p>
-                        <span class="mini-tag">Danmei</span>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </section>
+            <!-- Thẻ truyện 2 -->
+            <a href="profile.html" class="story-card">
+                <img src="https://i.pinimg.com/736x/8a/a0/08/8aa008906bdc7e7b8b7edee93936496f.jpg" alt="Bìa truyện">
+                <h3>Bé Mèo Dưới Hiên Nhà</h3>
+                <p>Hài Hước, Đáng Yêu</p>
+            </a>
 
-    <!-- ==========================================
-         PHẦN B: GIAO DIỆN ĐỌC TRUYỆN (READING)
-         ========================================== -->
-    <section id="reading-section" class="page-section">
-        <div class="toolbar">
-            <button class="tool-btn" onclick="changeFontSize(-2)">A-</button>
-            <span id="font-size-label">18px</span>
-            <button class="tool-btn" onclick="changeFontSize(2)">A+</button>
-            <button class="btn-cute-sm" onclick="saveToLibrary()"><i class="fas fa-bookmark"></i> Lưu Vào Kho</button>
-        </div>
-
-        <article class="reading-container">
-            <h1 id="current-story-title" class="story-title">Tên Truyện</h1>
-            <h3 class="story-chapter-title">Chương 1: Khởi Đầu Mới</h3>
-            
-            <div class="story-content" id="story-text">
-                <p data-para="1">Mưa rơi lất phất bên ngoài khung cửa sổ kính, nhuộm không gian thành một màu xanh nhạt. <span class="para-comment" onclick="commentParagraph(1)"><i class="far fa-comment-dots"></i></span></p>
-                <p data-para="2">Cậu khẽ lật giở trang sách, mùi hương giấy mới hòa quyện cùng vị trà ấm nồng nàn. <span class="para-comment" onclick="commentParagraph(2)"><i class="far fa-comment-dots"></i></span></p>
-                <p data-para="3">Bất chợt, một bóng người cao gầy che khuất ánh sáng dịu nhẹ bước vào bên trong phòng. <span class="para-comment" onclick="commentParagraph(3)"><i class="far fa-comment-dots"></i></span></p>
-            </div>
-        </article>
-
-        <div class="chapter-nav">
-            <button class="btn-nav" onclick="alert('Đây là chương đầu rồi!')"><i class="fas fa-arrow-left"></i> Chương Trước</button>
-            <button class="btn-nav" onclick="alert('Hết chương rồi, đợi nhóm dịch up tiếp nhé~')">Chương Sau <i class="fas fa-arrow-right"></i></button>
-        </div>
-
-        <div class="interaction-bar">
-            <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i> Yêu thích (<span class="count">105</span>)</button>
-            <button class="btn-share" onclick="sharePage()"><i class="fas fa-share-nodes"></i> Chia sẻ link</button>
-        </div>
-
-        <section class="comment-area">
-            <h4><i class="fas fa-comments"></i> Bình luận của độc giả</h4>
-            <div class="comment-input-box">
-                <textarea id="main-comment-input" placeholder="Nhập bình luận siêu dễ thương của bạn vào đây..."></textarea>
-                <button class="btn-send" onclick="submitMainComment()">Gửi đi</button>
-            </div>
-            <div class="comment-list" id="comment-list-box">
-                <div class="comment-item">
-                    <div class="c-avatar">🌸</div>
-                    <div class="c-info">
-                        <h5>Thỏ Con Mê Truyện</h5>
-                        <p>Ui chu choa truyện dễ thương xỉu lên xỉu xuống luôn á!</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </section>
-
-    <!-- ==========================================
-         PHẦN C: CỬA SỔ MODAL ĐĂNG NHẬP / HỒ SƠ
-         ========================================== -->
-    <div class="modal" id="auth-modal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
-            <div id="auth-form-box">
-                <h3 style="color: var(--primary); text-align: center; margin-top: 0;">🌿 THÀNH VIÊN ĐÔNG CUTE 🌿</h3>
-                <div class="input-group">
-                    <input type="text" id="username" placeholder="Tên tài khoản...">
-                </div>
-                <div class="input-group">
-                    <input type="password" id="password" placeholder="Mật khẩu...">
-                </div>
-                <button class="btn-cute-sm" style="width:100%; margin-top:10px;" onclick="handleLogin()">Đăng Nhập / Đăng Ký</button>
-            </div>
-
-            <div id="user-profile-box" style="display: none;">
-                <div class="profile-header">
-                    <div class="avatar-container">
-                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150" id="user-avatar" alt="Avatar">
-                        <label for="avatar-input" class="upload-btn"><i class="fas fa-camera"></i></label>
-                        <input type="file" id="avatar-input" accept="image/*" style="display:none;" onchange="uploadAvatar(event)">
-                    </div>
-                    <h3 id="display-name" style="margin: 10px 0 5px 0;">Độc giả cute</h3>
-                    <p style="font-size:12px; color:#aaa; margin:0;">Thành viên của gia đình Yểm Hử Đông</p>
-                </div>
-                <hr style="border:0; border-top:1px dashed var(--primary); margin:15px 0;">
-                <h4 class="profile-saved-title"><i class="fas fa-folder-heart"></i> Kho Truyện Đang Lưu</h4>
-                <div class="saved-list" id="saved-list-box">
-                    <p style="font-size:13px; color:#888;">Chưa có truyện nào được lưu cả~</p>
-                </div>
-            </div>
+            <!-- Thẻ truyện 3 -->
+            <a href="profile.html" class="story-card">
+                <img src="https://i.pinimg.com/736x/6f/db/05/6fdb05d933391d84bbaad7bdf75608b4.jpg" alt="Bìa truyện">
+                <h3>Thanh Xuân Năm Ấy</h3>
+                <p>Học Đường, Thanh Xuân</p>
+            </a>
         </div>
     </div>
 
+    <!-- Nhúng Javascript -->
     <script src="script.js"></script>
 </body>
 </html>
