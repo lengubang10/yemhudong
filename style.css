@@ -1,157 +1,167 @@
-/* Định nghĩa biến màu sắc */
-:root {
-    --primary-color: #8FBDF4;
-    --bg-light: #f4f8ff;
-    --text-light: #4a5568;
-    --card-light: #ffffff;
-    
-    --bg-dark: #1a202c;
-    --text-dark: #e2e8f0;
-    --card-dark: #2d3748;
+/* Sắp xếp Header gọn gàng */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-    padding: 0;
-    transition: background 0.3s, color 0.3s;
-    user-select: none; /* Chống sao chép cơ bản */
+.btn-icon {
+    background: var(--primary-light);
+    border: none;
+    color: var(--primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+.btn-icon:hover {
+    background: var(--primary);
+    color: white;
 }
 
-/* Chế độ sáng / tối */
-body.light-mode {
-    background-color: var(--bg-light);
-    color: var(--text-light);
-}
-body.dark-mode {
-    background-color: var(--bg-dark);
-    color: var(--text-dark);
+/* Thùng chứa trang chủ */
+.main-homepage {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-/* Header mang phong cách cute */
-header {
-    background-color: var(--primary-color);
-    padding: 15px;
+/* Khu tìm kiếm và chọn thể loại */
+.search-filter-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 4px 15px rgba(143, 189, 244, 0.4);
-}
-
-@media(min-width: 600px) {
-    header { flex-direction: row; justify-content: space-between; }
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: white;
-    text-shadow: 1px 2px 4px rgba(0,0,0,0.1);
-}
-
-/* Thanh tìm kiếm bo tròn */
-.search-bar {
-    display: flex;
-    background: white;
-    padding: 5px 10px;
-    border-radius: 30px;
-    width: 90%;
-    max-width: 400px;
-}
-.search-bar input {
-    border: none;
-    outline: none;
-    width: 100%;
-    padding: 5px;
-}
-.search-bar button {
-    border: none;
-    background: none;
-    color: var(--primary-color);
-    cursor: pointer;
-}
-
-/* Nút bấm kiểu cute */
-.btn-cute, .btn-nav {
-    background: white;
-    border: 2px solid var(--primary-color);
-    color: var(--text-light);
-    padding: 8px 15px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-.btn-cute:active, .btn-nav:active {
-    transform: scale(0.95);
-}
-
-/* Khung nội dung truyện */
-.reading-container {
-    max-width: 700px;
-    margin: 20px auto;
-    padding: 20px;
-    background: white;
-    border-radius: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-body.dark-mode .reading-container {
-    background: var(--card-dark);
-}
-
-.story-title {
-    text-align: center;
-    color: #5d9cec;
-}
-
-.story-content {
-    font-size: 18px;
-    line-height: 1.8;
-}
-
-/* Bình luận theo từng đoạn */
-.story-content p {
-    position: relative;
-    padding-right: 35px;
-}
-.para-comment-btn {
-    position: absolute;
-    right: 0;
-    top: 0;
-    cursor: pointer;
-    opacity: 0.3;
-    transition: opacity 0.2s;
-}
-.story-content p:hover .para-comment-btn {
-    opacity: 1;
-}
-
-.story-img {
-    width: 100%;
-    border-radius: 15px;
-    margin: 15px 0;
-}
-
-/* Điều hướng chương và tương tác */
-.chapter-nav, .interaction-zone {
-    display: flex;
-    justify-content: center;
     gap: 15px;
-    margin: 20px 0;
+    margin-bottom: 30px;
 }
 
-.btn-heart {
-    background: #ffe6e6;
-    border: none;
-    color: #ff5b5b;
-    padding: 10px 20px;
-    border-radius: 20px;
-    font-weight: bold;
-    cursor: pointer;
+.tags-container {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto; /* Vuốt ngang chọn thể loại trên điện thoại */
+    width: 100%;
+    padding: 5px 0;
+    scrollbar-width: none; /* Ẩn thanh cuộn xấu xí */
 }
-.btn-heart.liked i {
-    color: #ff5b5b;
-    font-weight: 900;
+.tags-container::-webkit-scrollbar { display: none; }
+
+.tag-item {
+    background: white;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+    border: 1px solid #e1e8f0;
+    transition: var(--transition);
+}
+body.dark-mode .tag-item {
+    background: var(--card-dark);
+    border-color: #343e52;
+}
+.tag-item.active, .tag-item:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* Tiêu đề mục */
+.section-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: var(--text-title-light);
+}
+body.dark-mode .section-title { color: var(--text-title-dark); }
+
+/* Bố cục lưới danh sách truyện (Ngăn nắp nhất) */
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Trên điện thoại chia làm 2 cột đều nhau */
+    gap: 20px;
+}
+
+@media (min-width: 600px) {
+    .story-grid {
+        grid-template-columns: repeat(3, 1fr); /* Trên máy tính/máy tính bảng chia 3 cột */
+    }
+}
+
+/* Thẻ truyện cute */
+.story-card {
+    background: var(--card-light);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    cursor: pointer;
+    transition: var(--transition);
+}
+body.dark-mode .story-card { background: var(--card-dark); }
+
+.story-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(143, 189, 244, 0.25);
+}
+
+.story-cover-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 130%; /* Giữ tỉ lệ ảnh bìa truyện luôn chuẩn */
+    background: #eef4fc;
+}
+
+.story-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.badge-hot {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ff7675;
+    color: white;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 10px;
+}
+
+.story-card-info {
+    padding: 12px;
+}
+
+.story-card-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Tự thu gọn tên truyện nếu quá dài */
+    color: var(--text-title-light);
+}
+body.dark-mode .story-card-info h4 { color: var(--text-title-dark); }
+
+.story-author {
+    margin: 0 0 8px 0;
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.story-genre {
+    font-size: 11px;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 700;
 }
