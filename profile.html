@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Yểm Hử Đông | Profile</title>
+    <style>
+        :root {
+            --primary: #8FBDF4;
+            --dark-bg: #121212;
+            --input-bg: #1e1e24;
+            --neon-pink: #FF007F;
+            --text-light: #ffffff;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
+
+        /* Header */
+        header { background: var(--primary); padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
+        .btn-auth { cursor: pointer; background: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; color: var(--primary); }
+
+        /* Main Profile */
+        .profile-card { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 5px solid var(--primary); text-align: center; }
+        .avatar { width: 120px; height: 120px; background: var(--primary); border-radius: 50%; margin-bottom: 15px; }
+
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; }
+        .modal-content { background: var(--dark-bg); padding: 40px; width: 350px; border-radius: 15px; color: white; text-align: center; }
+        .modal-content input { width: 100%; padding: 12px; margin: 10px 0; background: var(--input-bg); border: 1px solid #333; color: white; box-sizing: border-box; border-radius: 5px; }
+        .btn-pink { background: var(--neon-pink); color: white; border: none; padding: 12px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Yểm Hử Đông</h1>
+    <button class="btn-auth" onclick="toggleModal()">Đăng nhập</button>
+</header>
+
+<div class="profile-card">
+    <div style="display: flex; justify-content: center;"><div class="avatar"></div></div>
+    <h2>Yểm Hử Đông</h2>
+    <p>Người đồng hành trí tuệ của bạn.</p>
+    <p>Chuyên gia sáng tạo, lập trình và tư duy logic.</p>
+</div>
+
+<!-- Modal -->
+<div id="authModal" class="modal">
+    <div class="modal-content">
+        <h2>Chào mừng trở lại</h2>
+        <input type="text" placeholder="Tên đăng nhập">
+        <input type="password" placeholder="Mật khẩu">
+        <button class="btn-pink">XÁC NHẬN</button>
+        <p style="cursor: pointer; font-size: 0.8em; margin-top: 15px;" onclick="toggleModal()">Đóng</p>
+    </div>
+</div>
+
+<script>
+    function toggleModal() {
+        const modal = document.getElementById('authModal');
+        modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
+    }
+</script>
+
+</body>
+</html>
