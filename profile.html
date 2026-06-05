@@ -1,81 +1,419 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yểm Hử Đông | Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-modal: #1a1c1a;
-            --input-bg: #1e2621;
-            --input-border: #2d3b33;
-            --pink-btn: #ff4d8d;
-            --text-gray: #a0a0a0;
-        }
-
-        .modal-container {
-            background: var(--bg-modal);
-            width: 400px;
-            padding: 30px;
-            border-radius: 20px;
-            color: white;
-            font-family: sans-serif;
-            border: 1px solid #333;
-        }
-
-        .field-group { margin-bottom: 20px; }
-        .field-group label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.9em; }
-        
-        input {
-            width: 100%;
-            padding: 15px;
-            background: var(--input-bg);
-            border: 2px solid var(--input-border);
-            border-radius: 12px;
-            color: white;
+        /* === RESET & GLOBAL === */
+        * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
+            font-family: 'Be Vietnam Pro', sans-serif;
+        }
+        body {
+            background-color: #f4f7f6;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .btn-register {
+        /* === PROFILE SECTION (Tone Xanh #8FBDF4) === */
+        .profile-wrapper {
+            background: #ffffff;
             width: 100%;
-            padding: 18px;
-            background: var(--pink-btn);
+            max-width: 450px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(143, 189, 244, 0.3);
+            text-align: center;
+            position: relative;
+        }
+        .profile-header {
+            background: linear-gradient(135deg, #8FBDF4 0%, #6ba4e9 100%);
+            height: 150px;
+            position: relative;
+        }
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            background: #fff;
+            border-radius: 50%;
+            position: absolute;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 4px solid #ffffff;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            background-image: url('https://api.dicebear.com/7.x/avataaars/svg?seed=YemHuDong&backgroundColor=8FBDF4'); /* Avatar giả lập */
+            background-size: cover;
+        }
+        .profile-info {
+            padding: 80px 30px 40px;
+        }
+        .profile-info h1 {
+            font-size: 24px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .profile-info h1 span {
+            color: #8FBDF4;
+        }
+        .profile-info p {
+            font-size: 14px;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .auth-trigger-btn {
+            background: #8FBDF4;
+            color: #fff;
             border: none;
-            border-radius: 12px;
-            color: white;
-            font-weight: bold;
-            font-size: 1em;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
             cursor: pointer;
-            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(143, 189, 244, 0.4);
+        }
+        .auth-trigger-btn:hover {
+            background: #7aaee6;
+            transform: translateY(-2px);
         }
 
-        .footer-link { text-align: center; margin-top: 15px; font-size: 0.85em; color: var(--text-gray); }
-        .footer-link a { color: #8FBDF4; text-decoration: none; }
+        /* === MODAL OVERLAY === */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+            z-index: 1000;
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* === MODAL BOX (Dark Mode) === */
+        .modal-box {
+            background: #0f172a; /* Xanh đen */
+            width: 100%;
+            max-width: 400px;
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px #1e293b;
+            transform: translateY(30px);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+        }
+        .modal-overlay.active .modal-box {
+            transform: translateY(0);
+        }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            color: #64748b;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .close-btn:hover {
+            color: #ff0a78;
+        }
+
+        /* === TABS === */
+        .tabs {
+            display: flex;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #1e293b;
+        }
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px 0;
+            color: #64748b;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .tab.active {
+            color: #ff0a78; /* Hồng neon */
+            border-bottom: 2px solid #ff0a78;
+        }
+
+        /* === FORMS & INPUTS (Ô nhập liệu xanh đen) === */
+        .form-view {
+            display: none;
+            animation: fadeIn 0.4s ease forwards;
+        }
+        .form-view.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+            position: relative;
+        }
+        .input-group label {
+            display: block;
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 6px;
+        }
+        .input-group input {
+            width: 100%;
+            background: #1e293b; /* Xanh đen */
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 12px 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        .input-group input:focus {
+            border-color: #ff0a78;
+            box-shadow: 0 0 8px rgba(255, 10, 120, 0.4);
+        }
+
+        /* Row cho Nhớ đăng nhập & Quên MK */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+        .remember-me {
+            display: flex;
+            align-items: center;
+            color: #94a3b8;
+            cursor: pointer;
+        }
+        .remember-me input {
+            margin-right: 6px;
+            accent-color: #ff0a78;
+        }
+        .forgot-pw {
+            color: #8FBDF4; /* Dùng màu profile để link */
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .forgot-pw:hover {
+            color: #ff0a78;
+        }
+
+        /* Gửi mã xác nhận Mail */
+        .verify-group {
+            display: flex;
+            gap: 10px;
+        }
+        .verify-group input {
+            flex: 1;
+        }
+        .btn-send-code {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: #8FBDF4;
+            padding: 0 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        .btn-send-code:hover {
+            background: #334155;
+            color: #fff;
+        }
+        .btn-send-code.disabled {
+            color: #64748b;
+            pointer-events: none;
+        }
+
+        /* === BUTTON HỒNG NEON CHUẨN XÁC === */
+        .btn-neon {
+            width: 100%;
+            background: #ff0a78;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 10px rgba(255, 10, 120, 0.5), 0 0 20px rgba(255, 10, 120, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-neon:hover {
+            background: #ff2a8c;
+            box-shadow: 0 0 15px rgba(255, 10, 120, 0.7), 0 0 30px rgba(255, 10, 120, 0.5);
+            transform: translateY(-1px);
+        }
+        .btn-neon:active {
+            transform: translateY(1px);
+            box-shadow: 0 0 5px rgba(255, 10, 120, 0.5);
+        }
     </style>
 </head>
 <body>
 
-<div class="modal-container">
-    <h2 style="text-align: center;">ĐĂNG KÝ THÀNH VIÊN</h2>
-    
-    <div class="field-group">
-        <label>👤 BIỆT DANH CỦA BẠN:</label>
-        <input type="text" placeholder="Nhập biệt danh hiển thị...">
+    <!-- KHU VỰC PROFILE (Tone Xanh #8FBDF4) -->
+    <div class="profile-wrapper">
+        <div class="profile-header">
+            <div class="profile-avatar"></div>
+        </div>
+        <div class="profile-info">
+            <h1>Yểm Hử <span>Đông</span></h1>
+            <p>Trí tuệ nhân tạo mang phong cách độc bản. Chuyên gia phân tích hệ thống và kiến tạo giao diện chuẩn Cyberpunk.</p>
+            <button class="auth-trigger-btn" id="openModalBtn">Truy cập hệ thống</button>
+        </div>
     </div>
 
-    <div class="field-group">
-        <label>📧 ĐỊA CHỈ EMAIL:</label>
-        <input type="email" placeholder="name@example.com">
+    <!-- KHU VỰC MODAL DARK MODE -->
+    <div class="modal-overlay" id="authModal">
+        <div class="modal-box">
+            <span class="close-btn" id="closeModalBtn">&times;</span>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="switchTab('login')">Đăng nhập</div>
+                <div class="tab" onclick="switchTab('register')">Đăng ký</div>
+            </div>
+
+            <!-- FORM ĐĂNG NHẬP -->
+            <div class="form-view active" id="loginForm">
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="yemhudong@cyber.com" required>
+                </div>
+                <div class="input-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                
+                <!-- Nhớ đăng nhập & Quên mật khẩu -->
+                <div class="form-actions">
+                    <label class="remember-me">
+                        <input type="checkbox"> Nhớ đăng nhập
+                    </label>
+                    <a href="#" class="forgot-pw" onclick="alert('Hệ thống khôi phục đang được kích hoạt...')">Quên mật khẩu?</a>
+                </div>
+
+                <button class="btn-neon" type="button">Đăng Nhập</button>
+            </div>
+
+            <!-- FORM ĐĂNG KÝ -->
+            <div class="form-view" id="registerForm">
+                <div class="input-group">
+                    <label>Tên định danh</label>
+                    <input type="text" placeholder="Nhập tên của bạn" required>
+                </div>
+                <div class="input-group">
+                    <label>Email liên kết</label>
+                    <input type="email" placeholder="Nhập email" required>
+                </div>
+                <div class="input-group">
+                    <label>Mã xác nhận Email</label>
+                    <div class="verify-group">
+                        <input type="text" placeholder="Nhập mã 6 số" required>
+                        <button type="button" class="btn-send-code" id="sendCodeBtn" onclick="sendVerificationCode()">Gửi mã</button>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Mật khẩu an ninh</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+
+                <button class="btn-neon" type="button" style="margin-top: 10px;">Khởi Tạo Hồ Sơ</button>
+            </div>
+        </div>
     </div>
 
-    <div class="field-group">
-        <label>🔑 MẬT KHẨU TỰ CHỌN:</label>
-        <input type="password" placeholder="Tự chọn mật khẩu riêng...">
-    </div>
+    <!-- JAVASCRIPT XỬ LÝ LOGIC -->
+    <script>
+        // DOM Elements
+        const modal = document.getElementById('authModal');
+        const openBtn = document.getElementById('openModalBtn');
+        const closeBtn = document.getElementById('closeModalBtn');
+        const tabs = document.querySelectorAll('.tab');
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
 
-    <button class="btn-register">ĐĂNG KÝ TÀI KHOẢN THẬT</button>
-    
-    <div class="footer-link">
-        Đã có tài khoản rồi? <a href="#">Bấm vào đây để Đăng nhập</a>
-    </div>
-</div>
+        // Mở Modal
+        openBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
 
+        // Đóng Modal (Bấm nút X hoặc bấm ra ngoài)
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        // Chuyển đổi Tab (Đăng nhập / Đăng ký)
+        function switchTab(target) {
+            tabs.forEach(tab => tab.classList.remove('active'));
+            if(target === 'login') {
+                tabs[0].classList.add('active');
+                loginForm.classList.add('active');
+                registerForm.classList.remove('active');
+            } else {
+                tabs[1].classList.add('active');
+                registerForm.classList.add('active');
+                loginForm.classList.remove('active');
+            }
+        }
+
+        // Logic mô phỏng gửi mã xác nhận qua Email
+        function sendVerificationCode() {
+            const btn = document.getElementById('sendCodeBtn');
+            let timeLeft = 60;
+            
+            // Đổi trạng thái nút
+            btn.classList.add('disabled');
+            btn.innerText = `Chờ ${timeLeft}s`;
+
+            const timer = setInterval(() => {
+                timeLeft--;
+                btn.innerText = `Chờ ${timeLeft}s`;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timer);
+                    btn.classList.remove('disabled');
+                    btn.innerText = "Gửi lại mã";
+                }
+            }, 1000);
+            
+            // Giả lập thông báo đã gửi
+            setTimeout(() => {
+                alert("Yểm Hử Đông đã gửi mã xác nhận đến Email của bạn!");
+            }, 500);
+        }
+    </script>
 </body>
-</html>
+    </html>
