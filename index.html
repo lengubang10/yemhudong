@@ -2,59 +2,65 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yểm Hử Đông - Góc Đọc Truyện Cute</title>
-    <!-- Nhúng CSS & Icon -->
+    <title>Yểm Hử Đông - Trang Chủ</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-    <!-- HEADER GIAO DIỆN -->
     <header>
-        <a href="index.html" class="logo">
-            <i class="fa-solid fa-cat"></i> Yểm Hử Đông
-        </a>
+        <a href="index.html" class="logo"><i class="fa-solid fa-cat"></i> Yểm Hử Đông</a>
         <div class="search-bar">
             <input type="text" placeholder="Tìm tên truyện, thể loại...">
             <i class="fa-solid fa-search"></i>
         </div>
         <div class="nav-tools">
-            <button class="btn-tool" onclick="toggleTheme()" title="Sáng/Tối"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
-            <button class="btn-tool" title="Tủ truyện của tôi"><i class="fa-solid fa-book-bookmark"></i></button>
+            <button class="btn-tool" onclick="toggleTheme()"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
+            <button class="btn-tool"><i class="fa-solid fa-book-bookmark"></i></button>
             <button class="btn-login">Đăng nhập</button>
         </div>
     </header>
 
-    <!-- KHU VỰC DANH SÁCH TRUYỆN -->
     <div class="main-container">
-        <h2 class="section-title"><i class="fa-solid fa-star"></i> Truyện Mới Cập Nhật</h2>
-        
+        <!-- THỂ LOẠI -->
+        <h2 class="section-title"><i class="fa-solid fa-tags"></i> Thể Loại Truyện</h2>
+        <div class="genre-list">
+            <div class="genre-tag">Ngôn Tình</div>
+            <div class="genre-tag">Chữa Lành</div>
+            <div class="genre-tag">Thanh Xuân</div>
+            <div class="genre-tag">Hài Hước</div>
+            <div class="genre-tag">Xuyên Không</div>
+            <div class="genre-tag">Học Đường</div>
+        </div>
+
+        <!-- TRUYỆN MỚI CẬP NHẬT -->
+        <h2 class="section-title"><i class="fa-solid fa-star"></i> Mới Cập Nhật</h2>
         <div class="story-grid">
-            <!-- Thẻ truyện 1 (Bấm vào sẽ sang trang profile.html) -->
             <a href="profile.html" class="story-card">
-                <img src="https://i.pinimg.com/736x/21/df/b2/21dfb2c86b2de5d1d6a7edc1e793ea5e.jpg" alt="Bìa truyện">
-                <h3>Mùa Đông Ấm Áp Của Em</h3>
-                <p>Ngôn Tình, Chữa Lành</p>
+                <img src="https://i.pinimg.com/736x/21/df/b2/21dfb2c86b2de5d1d6a7edc1e793ea5e.jpg" alt="Bìa">
+                <h3>Mùa Đông Ấm Áp</h3>
+                <p>Ngôn Tình</p>
+                <div class="view-count"><i class="fa-solid fa-eye"></i> 15.2k lượt xem</div>
             </a>
-
-            <!-- Thẻ truyện 2 -->
             <a href="profile.html" class="story-card">
-                <img src="https://i.pinimg.com/736x/8a/a0/08/8aa008906bdc7e7b8b7edee93936496f.jpg" alt="Bìa truyện">
-                <h3>Bé Mèo Dưới Hiên Nhà</h3>
-                <p>Hài Hước, Đáng Yêu</p>
+                <img src="https://i.pinimg.com/736x/8a/a0/08/8aa008906bdc7e7b8b7edee93936496f.jpg" alt="Bìa">
+                <h3>Bé Mèo Dưới Hiên</h3>
+                <p>Chữa Lành</p>
+                <div class="view-count"><i class="fa-solid fa-eye"></i> 8.4k lượt xem</div>
             </a>
+        </div>
 
-            <!-- Thẻ truyện 3 -->
+        <!-- TRUYỆN ĐÃ HOÀN THÀNH -->
+        <h2 class="section-title"><i class="fa-solid fa-circle-check"></i> Truyện Đã Hoàn Thành</h2>
+        <div class="story-grid">
             <a href="profile.html" class="story-card">
-                <img src="https://i.pinimg.com/736x/6f/db/05/6fdb05d933391d84bbaad7bdf75608b4.jpg" alt="Bìa truyện">
+                <div class="badge-completed">FULL</div>
+                <img src="https://i.pinimg.com/736x/6f/db/05/6fdb05d933391d84bbaad7bdf75608b4.jpg" alt="Bìa">
                 <h3>Thanh Xuân Năm Ấy</h3>
-                <p>Học Đường, Thanh Xuân</p>
+                <p>Học Đường</p>
+                <div class="view-count"><i class="fa-solid fa-eye"></i> 120.5k lượt xem</div>
             </a>
         </div>
     </div>
-
-    <!-- Nhúng Javascript -->
     <script src="script.js"></script>
 </body>
 </html>
