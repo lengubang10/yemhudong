@@ -3,66 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yểm Hử Đông - Web Truyện Cute</title>
+    <title>Yểm Hử Đông - Trang Chủ</title>
+    <!-- Nhúng font chữ tròn cute -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <!-- Icon dễ thương -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="light-mode" oncontextmenu="return false;" onselectstart="return false;">
 
-    <!-- Thanh điều hướng / Header -->
+    <!-- 1. HEADER: Gọn gàng thanh thoát -->
     <header>
-        <div class="logo">✨ Yểm Hử Đông ✨</div>
-        <div class="search-bar">
-            <input type="text" placeholder="Tìm tên truyện hoặc thể loại...">
-            <button><i class="fas fa-search"></i></button>
-        </div>
-        <div class="user-actions">
-            <button class="btn-cute" onclick="toggleAuth()"><i class="fas fa-user"></i> Tài khoản</button>
-            <button id="theme-toggle" class="btn-cute"><i class="fas fa-moon"></i></button>
+        <div class="logo" onclick="location.href='index.html'">✨ Yểm Hử Đông ✨</div>
+        <div class="header-right">
+            <button id="theme-toggle" class="btn-icon"><i class="fas fa-moon"></i></button>
+            <a href="profile.html" class="btn-cute"><i class="fas fa-user"></i> Hồ sơ</a>
         </div>
     </header>
 
-    <!-- Khu vực tùy chỉnh đọc truyện -->
-    <div class="toolbar">
-        <button onclick="changeFontSize(-2)">A-</button>
-        <span id="font-size-display">18px</span>
-        <button onclick="changeFontSize(2)">A+</button>
-        <button class="btn-cute"><i class="fas fa-bookmark"></i> Lưu vào kho</button>
-    </div>
-
-    <!-- Nội dung truyện -->
-    <main class="reading-container">
-        <h1 class="story-title">Chương 1: Gặp Gỡ Dưới Mưa</h1>
+    <!-- Khu vực chính của Trang Chủ -->
+    <main class="main-homepage">
         
-        <div class="story-content" id="story-text">
-            <p data-paragraph="1">Đây là đoạn văn thứ nhất của truyện. Bạn có thể nhấn vào để bình luận riêng cho đoạn này. <span class="para-comment-btn" onclick="commentParagraph(1)">💬</span></p>
-            <p data-paragraph="2">Đoạn văn thứ hai đầy cảm xúc và lãng mạn với tone màu xanh dương pastel dịu mắt. <span class="para-comment-btn" onclick="commentParagraph(2)">💬</span></p>
-            <!-- Thử nghiệm up ảnh trong truyện -->
-            <img src="https://via.placeholder.com/500x300/8FBDF4/ffffff?text=Anh+Minh+Hoa+Cute" alt="Ảnh truyện" class="story-img">
-        </div>
+        <!-- 2. KHU TÌM KIẾM & BỘ LỌC (Gom gọn một chỗ) -->
+        <section class="search-filter-section">
+            <div class="search-bar">
+                <input type="text" placeholder="Tìm tên truyện hoặc thể loại...">
+                <button><i class="fas fa-search"></i></button>
+            </div>
+            
+            <!-- Danh sách thể loại nhanh để lọc -->
+            <div class="tags-container">
+                <span class="tag-item active">Tất cả</span>
+                <span class="tag-item">Danmei</span>
+                <span class="tag-item">Ngôn Tình</span>
+                <span class="tag-item">Huyền Huyễn</span>
+                <span class="tag-item">ABO</span>
+                <span class="tag-item">Đô Thị</span>
+            </div>
+        </section>
+
+        <!-- 3. KHU TRUYỆN MỚI CẬP NHẬT (Chia lưới ngăn nắp) -->
+        <section class="story-grid-section">
+            <h3 class="section-title"><i class="fas fa-star" style="color: #f1c40f;"></i> Truyện Mới Cập Nhật</h3>
+            
+            <div class="story-grid">
+                <!-- Truyện số 1 -->
+                <div class="story-card" onclick="location.href='reading.html'">
+                    <div class="story-cover-wrapper">
+                        <img src="https://via.placeholder.com/150x200/8FBDF4/ffffff?text=Yem+Hu+Dong" alt="Bìa truyện" class="story-cover">
+                        <span class="badge-hot">Hot</span>
+                    </div>
+                    <div class="story-card-info">
+                        <h4>Yểm Hử Đông Truyện Ký</h4>
+                        <p class="story-author">Tác giả: Gió Nhỏ</p>
+                        <span class="story-genre">Fantasy, ABO</span>
+                    </div>
+                </div>
+
+                <!-- Truyện số 2 -->
+                <div class="story-card">
+                    <div class="story-cover-wrapper">
+                        <img src="https://via.placeholder.com/150x200/a0e7e5/ffffff?text=Dam+My+Cute" alt="Bìa truyện" class="story-cover">
+                    </div>
+                    <div class="story-card-info">
+                        <h4>Tình Yêu Màu Xanh Pastel</h4>
+                        <p class="story-author">Tác giả: Thỏ Bông</p>
+                        <span class="story-genre">Danmei, Hiện Đại</span>
+                    </div>
+                </div>
+
+                <!-- Truyện số 3 -->
+                <div class="story-card">
+                    <div class="story-cover-wrapper">
+                        <img src="https://via.placeholder.com/150x200/ffc6ff/ffffff?text=Xuyen+Khong" alt="Bìa truyện" class="story-cover">
+                        <span class="badge-hot" style="background: #ff7675;">New</span>
+                    </div>
+                    <div class="story-card-info">
+                        <h4>Vận Tĩnh Lặng Trời</h4>
+                        <p class="story-author">Tác giả: Cổ Phong</p>
+                        <span class="story-genre">Cổ Đại, Trọng Sinh</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
-    <!-- Điều hướng chương -->
-    <div class="chapter-nav">
-        <button class="btn-nav"><i class="fas fa-chevron-left"></i> Chương trước</button>
-        <button class="btn-nav">Chương sau <i class="fas fa-chevron-right"></i></button>
-    </div>
-
-    <!-- Tương tác: Tim, Chia sẻ -->
-    <div class="interaction-zone">
-        <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i> <span class="count">102</span></button>
-        <button class="btn-share" onclick="shareStory()"><i class="fas fa-share-alt"></i> Chia sẻ</button>
-    </div>
-
-    <!-- Khu vực bình luận tổng -->
-    <section class="comment-section">
-        <h3><i class="fas fa-comments"></i> Bình luận</h3>
-        <div class="comment-input-box">
-            <textarea placeholder="Nhập bình luận dễ thương của bạn tại đây..."></textarea>
-            <button class="btn-cute">Gửi</button>
-        </div>
-    </section>
-
+    <script src="script.js"></script>
 </body>
 </html>
