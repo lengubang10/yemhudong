@@ -3,90 +3,182 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yểm Hử Đông - Trang Chủ</title>
-    <!-- Nhúng font chữ tròn cute -->
+    <title>Yểm Hử Đông - Hệ Thống Đọc Truyện Cute</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="light-mode" oncontextmenu="return false;" onselectstart="return false;">
+<body class="light-mode">
 
-    <!-- 1. HEADER: Gọn gàng thanh thoát -->
-    <header>
-        <div class="logo" onclick="location.href='index.html'">✨ Yểm Hử Đông ✨</div>
-        <div class="header-right">
-            <button id="theme-toggle" class="btn-icon"><i class="fas fa-moon"></i></button>
-            <a href="profile.html" class="btn-cute"><i class="fas fa-user"></i> Hồ sơ</a>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="dropdown">
+                    <button class="dropbtn">Thể loại <i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#" onclick="filterGenre('Danmei')">Danmei</a>
+                        <a href="#" onclick="filterGenre('Fantasy')">Fantasy</a>
+                        <a href="#" onclick="filterGenre('Cổ Phong')">Cổ Phong</a>
+                        <a href="#" onclick="filterGenre('Hiện Đại')">Hiện Đại</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Trạng thái <i class="fas fa-chevron-down"></i></button>
+                    <div class="dropdown-content">
+                        <a href="#">Đang tiến hành</a>
+                        <a href="#">Hoàn thành</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="logo" onclick="showPage('home-section')">🌿 YỂM HỬ ĐÔNG 🌿</div>
+
+            <div class="nav-right">
+                <button class="btn-bell" onclick="alert('Không có thông báo mới nào~')">
+                    <i class="fas fa-bell"></i>
+                </button>
+                <button id="theme-toggle" class="btn-round"><i class="fas fa-moon"></i></button>
+                
+                <button class="btn-login-outline" onclick="openAuthModal()" id="auth-btn">
+                    <i class="fas fa-user"></i> Đăng nhập
+                </button>
+            </div>
         </div>
-    </header>
+    </nav>
 
-    <!-- Khu vực chính của Trang Chủ -->
-    <main class="main-homepage">
-        
-        <!-- 2. KHU TÌM KIẾM & BỘ LỌC (Gom gọn một chỗ) -->
-        <section class="search-filter-section">
-            <div class="search-bar">
-                <input type="text" placeholder="Tìm tên truyện hoặc thể loại...">
-                <button><i class="fas fa-search"></i></button>
+    <div class="announcement-banner">
+        <div class="announcement-tag"><i class="fas fa-bullhorn"></i> THÔNG BÁO</div>
+        <div class="announcement-text">
+            <marquee behavior="scroll" direction="left" scrollamount="5">
+                Chào mừng bạn đến với Yểm Hử Đông! Web truyện tông xanh dương siêu cấp đáng yêu. Chúc các bạn có những giây phút đọc truyện thật vui vẻ ngọt ngào nhé~
+            </marquee>
+        </div>
+    </div>
+
+    <section id="home-section" class="page-section active">
+        <div class="hero-search">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="search-input" placeholder="Nhập tên truyện hoặc thể loại cần tìm...">
             </div>
             
-            <!-- Danh sách thể loại nhanh để lọc -->
-            <div class="tags-container">
-                <span class="tag-item active">Tất cả</span>
-                <span class="tag-item">Danmei</span>
-                <span class="tag-item">Ngôn Tình</span>
-                <span class="tag-item">Huyền Huyễn</span>
-                <span class="tag-item">ABO</span>
-                <span class="tag-item">Đô Thị</span>
+            <div class="tags-scroll">
+                <span class="tag active" onclick="filterGenre('all')">Tất cả</span>
+                <span class="tag" onclick="filterGenre('Danmei')">Danmei</span>
+                <span class="tag" onclick="filterGenre('Fantasy')">Fantasy</span>
+                <span class="tag" onclick="filterGenre('ABO')">ABO</span>
+                <span class="tag" onclick="filterGenre('Cổ Phong')">Cổ Phong</span>
             </div>
-        </section>
+        </div>
 
-        <!-- 3. KHU TRUYỆN MỚI CẬP NHẬT (Chia lưới ngăn nắp) -->
-        <section class="story-grid-section">
-            <h3 class="section-title"><i class="fas fa-star" style="color: #f1c40f;"></i> Truyện Mới Cập Nhật</h3>
-            
+        <main class="main-content">
+            <h3 class="section-title"><i class="fas fa-star" style="color: #f1c40f;"></i> Danh Sách Truyện Đề Cử</h3>
             <div class="story-grid">
-                <!-- Truyện số 1 -->
-                <div class="story-card" onclick="location.href='reading.html'">
-                    <div class="story-cover-wrapper">
-                        <img src="https://via.placeholder.com/150x200/8FBDF4/ffffff?text=Yem+Hu+Dong" alt="Bìa truyện" class="story-cover">
-                        <span class="badge-hot">Hot</span>
+                <div class="story-card" data-genre="Fantasy ABO" onclick="openStory('Yểm Hử Đông Truyện Ký')">
+                    <div class="card-cover">
+                        <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=400" alt="Bìa">
+                        <span class="card-badge hot">Hot</span>
                     </div>
-                    <div class="story-card-info">
+                    <div class="card-info">
                         <h4>Yểm Hử Đông Truyện Ký</h4>
-                        <p class="story-author">Tác giả: Gió Nhỏ</p>
-                        <span class="story-genre">Fantasy, ABO</span>
+                        <p>Chương 120 • Hoàn thành</p>
+                        <span class="mini-tag">Fantasy</span>
                     </div>
                 </div>
-
-                <!-- Truyện số 2 -->
-                <div class="story-card">
-                    <div class="story-cover-wrapper">
-                        <img src="https://via.placeholder.com/150x200/a0e7e5/ffffff?text=Dam+My+Cute" alt="Bìa truyện" class="story-cover">
+                <div class="story-card" data-genre="Danmei Hiện Đại" onclick="openStory('Tình Yêu Màu Xanh Pastel')">
+                    <div class="card-cover">
+                        <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400" alt="Bìa">
+                        <span class="card-badge new">Mới</span>
                     </div>
-                    <div class="story-card-info">
+                    <div class="card-info">
                         <h4>Tình Yêu Màu Xanh Pastel</h4>
-                        <p class="story-author">Tác giả: Thỏ Bông</p>
-                        <span class="story-genre">Danmei, Hiện Đại</span>
+                        <p>Chương 45 • Đang ra</p>
+                        <span class="mini-tag">Danmei</span>
                     </div>
                 </div>
+            </div>
+        </main>
+    </section>
 
-                <!-- Truyện số 3 -->
-                <div class="story-card">
-                    <div class="story-cover-wrapper">
-                        <img src="https://via.placeholder.com/150x200/ffc6ff/ffffff?text=Xuyen+Khong" alt="Bìa truyện" class="story-cover">
-                        <span class="badge-hot" style="background: #ff7675;">New</span>
-                    </div>
-                    <div class="story-card-info">
-                        <h4>Vận Tĩnh Lặng Trời</h4>
-                        <p class="story-author">Tác giả: Cổ Phong</p>
-                        <span class="story-genre">Cổ Đại, Trọng Sinh</span>
+    <section id="reading-section" class="page-section">
+        <div class="toolbar">
+            <button class="tool-btn" onclick="changeFontSize(-2)">A-</button>
+            <span id="font-size-label">18px</span>
+            <button class="tool-btn" onclick="changeFontSize(2)">A+</button>
+            <button class="btn-cute-sm" onclick="saveToLibrary()"><i class="fas fa-bookmark"></i> Lưu Vào Kho</button>
+        </div>
+
+        <article class="reading-container">
+            <h1 id="current-story-title" class="story-title">Tên Truyện</h1>
+            <h3 class="story-chapter-title">Chương 1: Khởi Đầu Mới</h3>
+            
+            <div class="story-content" id="story-text">
+                <p data-para="1">Mưa rơi lất phất bên ngoài khung cửa sổ kính, nhuộm không gian thành một màu xanh nhạt. <span class="para-comment" onclick="commentParagraph(1)"><i class="far fa-comment-dots"></i></span></p>
+                <p data-para="2">Cậu khẽ lật giở trang sách, mùi hương giấy mới hòa quyện cùng vị trà ấm nồng nàn. <span class="para-comment" onclick="commentParagraph(2)"><i class="far fa-comment-dots"></i></span></p>
+                <p data-para="3">Bất chợt, một bóng người cao gầy che khuất ánh sáng dịu nhẹ bước vào bên trong phòng. <span class="para-comment" onclick="commentParagraph(3)"><i class="far fa-comment-dots"></i></span></p>
+            </div>
+        </article>
+
+        <div class="chapter-nav">
+            <button class="btn-nav" onclick="alert('Đây là chương đầu rồi!')"><i class="fas fa-arrow-left"></i> Chương Trước</button>
+            <button class="btn-nav" onclick="alert('Hết chương rồi, đợi nhóm dịch up tiếp nhé~')">Chương Sau <i class="fas fa-arrow-right"></i></button>
+        </div>
+
+        <div class="interaction-bar">
+            <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i> Yêu thích (<span class="count">105</span>)</button>
+            <button class="btn-share" onclick="sharePage()"><i class="fas fa-share-nodes"></i> Chia sẻ link</button>
+        </div>
+
+        <section class="comment-area">
+            <h4><i class="fas fa-comments"></i> Bình luận của độc giả</h4>
+            <div class="comment-input-box">
+                <textarea id="main-comment-input" placeholder="Nhập bình luận siêu dễ thương của bạn vào đây..."></textarea>
+                <button class="btn-send" onclick="submitMainComment()">Gửi đi</button>
+            </div>
+            <div class="comment-list" id="comment-list-box">
+                <div class="comment-item">
+                    <div class="c-avatar">🌸</div>
+                    <div class="c-info">
+                        <h5>Thỏ Con Mê Truyện</h5>
+                        <p>Ui chu choa truyện dễ thương xỉu lên xỉu xuống luôn á, hóng chương tiếp theo ghê!</p>
                     </div>
                 </div>
             </div>
         </section>
+    </section>
 
-    </main>
+    <div class="modal" id="auth-modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAuthModal()">&times;</span>
+            <div id="auth-form-box">
+                <h3 style="color: var(--primary); text-align: center;">🌿 THÀNH VIÊN ĐÔNG CUTE 🌿</h3>
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Tên tài khoản...">
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Mật khẩu...">
+                </div>
+                <button class="btn-cute-sm" style="width:100%; margin-top:10px;" onclick="handleLogin()">Đăng Nhập / Đăng Ký</button>
+            </div>
+
+            <div id="user-profile-box" style="display: none;">
+                <div class="profile-header">
+                    <div class="avatar-container">
+                        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150" id="user-avatar" alt="Avatar">
+                        <label for="avatar-input" class="upload-btn"><i class="fas fa-camera"></i></label>
+                        <input type="file" id="avatar-input" accept="image/*" style="display:none;" onchange="uploadAvatar(event)">
+                    </div>
+                    <h3 id="display-name" style="margin: 10px 0 5px 0;">Độc giả cute</h3>
+                    <p style="font-size:12px; color:#aaa; margin:0;">Thành viên của gia đình Yểm Hử Đông</p>
+                </div>
+                <hr style="border:0; border-top:1px dashed var(--primary); margin:15px 0;">
+                <h4><i class="fas fa-folder-heart" style="color:var(--primary)"></i> Kho Truyện Đang Lưu</h4>
+                <div class="saved-list" id="saved-list-box">
+                    <p style="font-size:13px; color:#888;">Chưa có truyện nào được lưu cả~</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
