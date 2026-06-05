@@ -2,130 +2,58 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thông tin truyện - Yểm Hử Đông</title>
+    <title>Thông tin truyện</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-    <!-- HEADER GIỐNG TRANG CHỦ -->
     <header>
         <a href="index.html" class="logo"><i class="fa-solid fa-cat"></i> Yểm Hử Đông</a>
-        <div class="search-bar">
-            <input type="text" placeholder="Tìm tên truyện, thể loại...">
-            <i class="fa-solid fa-search"></i>
-        </div>
         <div class="nav-tools">
             <button class="btn-tool" onclick="toggleTheme()"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
-            <button class="btn-tool"><i class="fa-solid fa-book-bookmark"></i></button>
-            <button class="btn-login">Đăng nhập</button>
+            <button class="btn-login">Lưu Truyện</button>
         </div>
     </header>
 
     <div class="profile-wrap">
-        <!-- 1. THÔNG TIN BÌA TRUYỆN -->
         <div class="profile-header">
-            <img src="https://i.pinimg.com/736x/21/df/b2/21dfb2c86b2de5d1d6a7edc1e793ea5e.jpg" alt="Bìa truyện" class="cover-img">
+            <img src="https://i.pinimg.com/736x/21/df/b2/21dfb2c86b2de5d1d6a7edc1e793ea5e.jpg" class="cover-img">
             <div class="info-text">
                 <h1>Mùa Đông Ấm Áp Của Em</h1>
-                <p style="margin-bottom: 10px;"><strong>Tác giả:</strong> Nhược Thủy</p>
-                <div class="tags">
-                    <span>Ngôn Tình</span>
-                    <span>Chữa Lành</span>
-                    <span>Cute</span>
-                </div>
-                <p style="margin-top: 15px;"><strong>Trạng thái:</strong> Đang ra (15 Chương)</p>
-                <a href="#doc-truyen" class="btn-read-now"><i class="fa-solid fa-book-open"></i> Đọc Từ Đầu</a>
+                <p><strong>Tác giả:</strong> Nhược Thủy</p>
+                <p style="margin-top: 10px;">
+                    <span style="background: var(--bg-color); padding: 5px 10px; border-radius: 10px; color: var(--primary-color);">Ngôn Tình</span>
+                </p>
+                <p style="margin-top: 15px;"><i class="fa-solid fa-eye"></i> Tổng lượt xem: <strong>15,204</strong></p>
+                <!-- Bấm vào đây sẽ mở read.html -->
+                <a href="read.html" style="background: var(--primary-color); color: #fff; padding: 10px 25px; border-radius: 20px; display: inline-block; margin-top: 20px; font-weight: bold;">Đọc Từ Đầu</a>
             </div>
         </div>
 
-        <!-- 2. VĂN ÁN (MÔ TẢ) -->
         <div class="box-section">
             <h2><i class="fa-solid fa-leaf"></i> Văn Án</h2>
-            <div class="synopsis">
-                Vào một ngày tuyết rơi đầy trời, cô nhặt được một con mèo nhỏ... À không, là một chàng thiếu niên bị lạc đường.<br><br>
-                "Này, cậu có muốn về nhà với tôi không?"<br>
-                Cứ như thế, mùa đông lạnh lẽo bỗng hóa thành những chuỗi ngày ấm áp ngọt ngào. Đây là câu chuyện chữa lành những trái tim cô đơn.
-            </div>
+            <div style="line-height: 1.8;">Vào một ngày tuyết rơi đầy trời, cô nhặt được một chàng thiếu niên bị lạc đường...</div>
         </div>
 
-        <!-- 3. MỤC LỤC -->
         <div class="box-section">
             <h2><i class="fa-solid fa-list"></i> Mục Lục</h2>
             <ul class="chapter-list">
-                <li><span>Chương 1: Gặp gỡ dưới trời tuyết</span> <span>01/11/2023</span></li>
-                <li><span>Chương 2: Cốc cacao nóng</span> <span>05/11/2023</span></li>
-                <li><span>Chương 3: Tiếng tim đập thình thịch</span> <span>10/11/2023</span></li>
+                <!-- Bấm vào dòng này sẽ nhảy sang trang đọc -->
+                <li>
+                    <a href="read.html">
+                        <span>Chương 1: Gặp gỡ dưới trời tuyết</span> 
+                        <span class="view-count"><i class="fa-solid fa-eye"></i> 5.2k</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="read.html">
+                        <span>Chương 2: Cốc cacao nóng</span> 
+                        <span class="view-count"><i class="fa-solid fa-eye"></i> 4.8k</span>
+                    </a>
+                </li>
             </ul>
         </div>
-
-        <hr style="border: 1px solid var(--primary-color); opacity: 0.3; margin: 40px 0;">
-
-        <!-- 4. KHU VỰC ĐỌC TRUYỆN CÓ CHỐNG COPY -->
-        <div id="doc-truyen" style="text-align: center; margin-bottom: 20px;">
-            <h2 style="color: var(--primary-color);">Chương 1: Gặp gỡ dưới trời tuyết</h2>
-        </div>
-
-        <!-- Cài đặt chữ -->
-        <div class="reading-settings">
-            <button onclick="changeFontSize(-1)">A- Giảm chữ</button>
-            <button onclick="changeFontSize(1)">A+ Tăng chữ</button>
-        </div>
-
-        <!-- Nội dung truyện -->
-        <div class="story-content anti-copy" id="reading-content">
-            <div class="story-paragraph">
-                <p>Gió bấc rít gào bên ngoài khung cửa sổ. Đông vươn tay quấn chặt chiếc khăn len quanh cổ, bước ra khỏi quán cà phê nhỏ ở góc phố.</p>
-                <div class="inline-comment-btn" onclick="inlineComment(this)" title="Bình luận đoạn này"><i class="fa-regular fa-comment-dots"></i></div>
-            </div>
-            
-            <div class="story-paragraph">
-                <p>Ngay tại bậc thềm vương vãi những bông tuyết đầu mùa, cô nhìn thấy một dáng người đang thu mình lại. Áo khoác mỏng manh, đôi tay buốt cóng.</p>
-                <div class="inline-comment-btn" onclick="inlineComment(this)"><i class="fa-regular fa-comment-dots"></i></div>
-            </div>
-
-            <div class="story-paragraph">
-                <p>Cô tiến lại gần, khẽ chạm vào vai cậu thiếu niên ấy. Khoảnh khắc cậu ngẩng đầu lên, ánh mắt trong veo ấy đã định sẵn sẽ gắn bó với cô suốt quãng đời còn lại.</p>
-                <div class="inline-comment-btn" onclick="inlineComment(this)"><i class="fa-regular fa-comment-dots"></i></div>
-            </div>
-        </div>
-
-        <!-- Chuyển chương -->
-        <div class="chapter-nav">
-            <button class="btn-nav"><i class="fa-solid fa-arrow-left"></i> Chương trước</button>
-            <button class="btn-nav">Chương sau <i class="fa-solid fa-arrow-right"></i></button>
-        </div>
-
-        <!-- Nút Tương tác -->
-        <div class="interaction-bar">
-            <div class="interaction-item" onclick="toggleHeart(this)">
-                <i class="fa-solid fa-heart"></i>
-                <span>1.2k</span>
-            </div>
-            <div class="interaction-item">
-                <i class="fa-solid fa-share-nodes"></i>
-                <span>Chia sẻ</span>
-            </div>
-        </div>
-
-        <!-- Khu vực bình luận (Có up ảnh) -->
-        <div class="box-section">
-            <h2>Bình luận (15)</h2>
-            <div class="comment-box">
-                <img src="https://api.dicebear.com/6.x/adventurer/svg?seed=Mimi" alt="avatar">
-                <div class="comment-input-area">
-                    <textarea placeholder="Gửi gắm chút yêu thương cho tác giả nha..."></textarea>
-                    <div class="comment-actions">
-                        <button class="btn-upload-img" title="Đính kèm ảnh"><i class="fa-regular fa-image"></i></button>
-                        <button class="btn-send">Gửi bình luận</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
