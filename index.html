@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yểm Hử Đông - Web Truyện Cute</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Icon dễ thương -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="light-mode" oncontextmenu="return false;" onselectstart="return false;">
+
+    <!-- Thanh điều hướng / Header -->
+    <header>
+        <div class="logo">✨ Yểm Hử Đông ✨</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Tìm tên truyện hoặc thể loại...">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="user-actions">
+            <button class="btn-cute" onclick="toggleAuth()"><i class="fas fa-user"></i> Tài khoản</button>
+            <button id="theme-toggle" class="btn-cute"><i class="fas fa-moon"></i></button>
+        </div>
+    </header>
+
+    <!-- Khu vực tùy chỉnh đọc truyện -->
+    <div class="toolbar">
+        <button onclick="changeFontSize(-2)">A-</button>
+        <span id="font-size-display">18px</span>
+        <button onclick="changeFontSize(2)">A+</button>
+        <button class="btn-cute"><i class="fas fa-bookmark"></i> Lưu vào kho</button>
+    </div>
+
+    <!-- Nội dung truyện -->
+    <main class="reading-container">
+        <h1 class="story-title">Chương 1: Gặp Gỡ Dưới Mưa</h1>
+        
+        <div class="story-content" id="story-text">
+            <p data-paragraph="1">Đây là đoạn văn thứ nhất của truyện. Bạn có thể nhấn vào để bình luận riêng cho đoạn này. <span class="para-comment-btn" onclick="commentParagraph(1)">💬</span></p>
+            <p data-paragraph="2">Đoạn văn thứ hai đầy cảm xúc và lãng mạn với tone màu xanh dương pastel dịu mắt. <span class="para-comment-btn" onclick="commentParagraph(2)">💬</span></p>
+            <!-- Thử nghiệm up ảnh trong truyện -->
+            <img src="https://via.placeholder.com/500x300/8FBDF4/ffffff?text=Anh+Minh+Hoa+Cute" alt="Ảnh truyện" class="story-img">
+        </div>
+    </main>
+
+    <!-- Điều hướng chương -->
+    <div class="chapter-nav">
+        <button class="btn-nav"><i class="fas fa-chevron-left"></i> Chương trước</button>
+        <button class="btn-nav">Chương sau <i class="fas fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Tương tác: Tim, Chia sẻ -->
+    <div class="interaction-zone">
+        <button class="btn-heart" onclick="toggleHeart(this)"><i class="far fa-heart"></i> <span class="count">102</span></button>
+        <button class="btn-share" onclick="shareStory()"><i class="fas fa-share-alt"></i> Chia sẻ</button>
+    </div>
+
+    <!-- Khu vực bình luận tổng -->
+    <section class="comment-section">
+        <h3><i class="fas fa-comments"></i> Bình luận</h3>
+        <div class="comment-input-box">
+            <textarea placeholder="Nhập bình luận dễ thương của bạn tại đây..."></textarea>
+            <button class="btn-cute">Gửi</button>
+        </div>
+    </section>
+
+</body>
+</html>
