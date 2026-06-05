@@ -1,98 +1,81 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Yểm Hử Đông | Access Portal</title>
     <style>
         :root {
-            --primary: #8FBDF4;
-            --dark-bg: #121212;
-            --input-bg: #1e1e24;
-            --neon-pink: #FF007F;
-            --text-light: #ffffff;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --bg-modal: #1a1c1a;
+            --input-bg: #1e2621;
+            --input-border: #2d3b33;
+            --pink-btn: #ff4d8d;
+            --text-gray: #a0a0a0;
         }
 
-        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; }
-
-        /* --- Header --- */
-        header { background: var(--primary); padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; color: white; }
-        .logo { font-weight: bold; font-size: 1.5em; letter-spacing: 1px; }
-
-        /* --- Modal Chi tiết --- */
-        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-content { background: var(--dark-bg); padding: 40px; width: 350px; border-radius: 20px; color: white; border: 1px solid #333; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
-        
-        /* Input & Button Detail */
-        input { width: 100%; padding: 12px; margin: 8px 0; background: var(--input-bg); border: 1px solid #444; color: white; border-radius: 8px; transition: var(--transition); }
-        input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 8px rgba(143, 189, 244, 0.3); }
-        
-        .btn-neon { 
-            background: linear-gradient(45deg, var(--neon-pink), #ff5a9d); 
-            border: none; padding: 14px; width: 100%; cursor: pointer; color: white; 
-            font-weight: 700; border-radius: 8px; margin-top: 20px;
-            transition: var(--transition); text-transform: uppercase; letter-spacing: 1px;
+        .modal-container {
+            background: var(--bg-modal);
+            width: 400px;
+            padding: 30px;
+            border-radius: 20px;
+            color: white;
+            font-family: sans-serif;
+            border: 1px solid #333;
         }
-        .btn-neon:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4); }
 
-        /* Trạng thái Loading */
-        .spinner { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid var(--neon-pink); border-radius: 50%; animation: spin 1s linear infinite; margin: 10px auto; display: none; }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .field-group { margin-bottom: 20px; }
+        .field-group label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.9em; }
+        
+        input {
+            width: 100%;
+            padding: 15px;
+            background: var(--input-bg);
+            border: 2px solid var(--input-border);
+            border-radius: 12px;
+            color: white;
+            box-sizing: border-box;
+        }
 
-        .hidden { display: none; }
+        .btn-register {
+            width: 100%;
+            padding: 18px;
+            background: var(--pink-btn);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: bold;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .footer-link { text-align: center; margin-top: 15px; font-size: 0.85em; color: var(--text-gray); }
+        .footer-link a { color: #8FBDF4; text-decoration: none; }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">YỂM HỬ ĐÔNG</div>
-    <button onclick="showStep('login')" style="padding: 8px 20px; cursor:pointer;">Đăng nhập</button>
-</header>
+<div class="modal-container">
+    <h2 style="text-align: center;">ĐĂNG KÝ THÀNH VIÊN</h2>
+    
+    <div class="field-group">
+        <label>👤 BIỆT DANH CỦA BẠN:</label>
+        <input type="text" placeholder="Nhập biệt danh hiển thị...">
+    </div>
 
-<div id="modal" class="modal">
-    <div class="modal-content">
-        <!-- Form Đăng nhập -->
-        <div id="step-login">
-            <h2>Đăng nhập</h2>
-            <input type="text" placeholder="Tên người dùng">
-            <input type="password" placeholder="Mật khẩu">
-            <label><input type="checkbox"> Nhớ đăng nhập</label>
-            <button class="btn-neon" onclick="handleAuth()">Đăng nhập</button>
-            <p onclick="showStep('forgot')" style="font-size: 0.8em; color: var(--primary); cursor: pointer; margin-top: 15px;">Quên mật khẩu?</p>
-        </div>
+    <div class="field-group">
+        <label>📧 ĐỊA CHỈ EMAIL:</label>
+        <input type="email" placeholder="name@example.com">
+    </div>
 
-        <!-- Form Quên mật khẩu -->
-        <div id="step-forgot" class="hidden">
-            <h2>Khôi phục</h2>
-            <input type="email" placeholder="Nhập email của bạn">
-            <button class="btn-neon" onclick="handleLoading()">Gửi mã xác nhận</button>
-            <p onclick="showStep('login')" style="cursor: pointer; color: #888; margin-top: 15px;">« Quay lại</p>
-        </div>
+    <div class="field-group">
+        <label>🔑 MẬT KHẨU TỰ CHỌN:</label>
+        <input type="password" placeholder="Tự chọn mật khẩu riêng...">
+    </div>
 
-        <!-- Loading & Status -->
-        <div id="step-loading" class="hidden" style="text-align: center;">
-            <div class="spinner" style="display: block;"></div>
-            <p>Đang gửi mã...</p>
-        </div>
+    <button class="btn-register">ĐĂNG KÝ TÀI KHOẢN THẬT</button>
+    
+    <div class="footer-link">
+        Đã có tài khoản rồi? <a href="#">Bấm vào đây để Đăng nhập</a>
     </div>
 </div>
-
-<script>
-    function showStep(step) {
-        document.getElementById('step-login').classList.add('hidden');
-        document.getElementById('step-forgot').classList.add('hidden');
-        document.getElementById('step-loading').classList.add('hidden');
-        document.getElementById('modal').style.display = 'flex';
-        document.getElementById('step-' + step).classList.remove('hidden');
-    }
-
-    function handleLoading() {
-        showStep('loading');
-        setTimeout(() => { alert("Mã xác nhận đã được gửi tới email của bạn!"); showStep('login'); }, 2000);
-    }
-    
-    function handleAuth() { alert("Đang xử lý đăng nhập..."); }
-</script>
 
 </body>
 </html>
