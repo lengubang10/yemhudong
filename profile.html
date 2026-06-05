@@ -2,64 +2,102 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
-    <title>Yểm Hử Đông | Profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ Thành Viên - Yểm Hử Đông</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
     <style>
         :root {
             --primary: #8FBDF4;
-            --dark-bg: #121212;
-            --input-bg: #1e1e24;
-            --neon-pink: #FF007F;
-            --text-light: #ffffff;
+            --primary-light: #e6f0fa;
+            --bg-color: #f4f7f6;
+            --card-bg: #ffffff;
+            --text-main: #333333;
+            --text-muted: #888888;
+            --border-color: #e2e8f0;
+            --shadow: 0 4px 15px rgba(0,0,0,0.05);
         }
 
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
+        body { font-family: 'Nunito', sans-serif; background-color: var(--bg-color); color: var(--text-main); margin: 0; }
+        
+        /* HEADER */
+        header { background-color: var(--card-bg); padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; box-shadow: var(--shadow); }
+        .logo { font-size: 22px; font-weight: 800; color: var(--primary); text-decoration: none; }
+        .nav-right { display: flex; align-items: center; gap: 15px; }
+        .notification-btn { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-weight: 600; cursor: pointer; text-decoration: none; font-size: 14px; }
+        .notification-btn:hover { color: var(--primary); }
 
-        /* Header */
-        header { background: var(--primary); padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
-        .btn-auth { cursor: pointer; background: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; color: var(--primary); }
-
-        /* Main Profile */
-        .profile-card { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 5px solid var(--primary); text-align: center; }
-        .avatar { width: 120px; height: 120px; background: var(--primary); border-radius: 50%; margin-bottom: 15px; }
-
-        /* Modal */
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); justify-content: center; align-items: center; }
-        .modal-content { background: var(--dark-bg); padding: 40px; width: 350px; border-radius: 15px; color: white; text-align: center; }
-        .modal-content input { width: 100%; padding: 12px; margin: 10px 0; background: var(--input-bg); border: 1px solid #333; color: white; box-sizing: border-box; border-radius: 5px; }
-        .btn-pink { background: var(--neon-pink); color: white; border: none; padding: 12px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; margin-top: 10px; }
+        /* CONTENT */
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        
+        /* Giao diện chi tiết truyện */
+        .detail-page { background: var(--card-bg); padding: 30px; border-radius: 20px; box-shadow: var(--shadow); display: none; }
+        .story-header { display: flex; gap: 30px; margin-bottom: 40px; }
+        #story-cover { width: 220px; height: 300px; object-fit: cover; border-radius: 15px; }
+        
+        .chapter-list { list-style: none; padding: 0; }
+        .chapter-list li { border-bottom: 1px solid var(--border-color); padding: 12px 0; }
+        .chapter-list a { text-decoration: none; color: var(--text-main); font-weight: 600; }
+        .chapter-list a:hover { color: var(--primary); }
     </style>
 </head>
 <body>
 
-<header>
-    <h1>Yểm Hử Đông</h1>
-    <button class="btn-auth" onclick="toggleModal()">Đăng nhập</button>
-</header>
+    <header>
+        <a href="#" class="logo">🌿 YỂM HỬ ĐÔNG</a>
+        <div class="nav-right">
+            <a href="#" class="notification-btn">
+                <i class="fas fa-bell"></i> <span>Thông Báo</span>
+            </a>
+        </div>
+    </header>
 
-<div class="profile-card">
-    <div style="display: flex; justify-content: center;"><div class="avatar"></div></div>
-    <h2>Yểm Hử Đông</h2>
-    <p>Người đồng hành trí tuệ của bạn.</p>
-    <p>Chuyên gia sáng tạo, lập trình và tư duy logic.</p>
-</div>
+    <div class="container">
+        <div id="library-view">
+            <h3>Tủ sách của tôi</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px;">
+                <div class="book-card" onclick="showDetail('Giang Hạc Linh', 'Tác giả A', 'Văn án tuyệt hay về mối tình ngang trái...', 'https://via.placeholder.com/220x300')">
+                    <img src="https://via.placeholder.com/220x300" style="width:100%; border-radius:10px;">
+                    <p style="font-weight:700;">Giang Hạc Linh</p>
+                </div>
+            </div>
+        </div>
 
-<!-- Modal -->
-<div id="authModal" class="modal">
-    <div class="modal-content">
-        <h2>Chào mừng trở lại</h2>
-        <input type="text" placeholder="Tên đăng nhập">
-        <input type="password" placeholder="Mật khẩu">
-        <button class="btn-pink">XÁC NHẬN</button>
-        <p style="cursor: pointer; font-size: 0.8em; margin-top: 15px;" onclick="toggleModal()">Đóng</p>
+        <div id="detail-page" class="detail-page">
+            <button onclick="hideDetail()" style="border:none; background:none; cursor:pointer; margin-bottom:15px; color:var(--primary); font-weight:700;">← Quay lại tủ sách</button>
+            <div class="story-header">
+                <img id="story-cover" src="" alt="Bìa">
+                <div>
+                    <h1 id="story-title" style="margin-top:0;"></h1>
+                    <p id="story-author" style="font-weight:700; color:var(--primary);"></p>
+                    <div id="story-desc" style="line-height:1.6; color:#555;"></div>
+                </div>
+            </div>
+            
+            <h3>Mục Lục</h3>
+            <ul class="chapter-list">
+                <li><a href="#">Chương 1: Khởi đầu mới</a></li>
+                <li><a href="#">Chương 2: Gặp gỡ bất ngờ</a></li>
+            </ul>
+        </div>
     </div>
-</div>
 
-<script>
-    function toggleModal() {
-        const modal = document.getElementById('authModal');
-        modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
-    }
-</script>
+    <script>
+        function showDetail(title, author, desc, cover) {
+            document.getElementById('library-view').style.display = 'none';
+            document.getElementById('detail-page').style.display = 'block';
+            
+            document.getElementById('story-title').innerText = title;
+            document.getElementById('story-author').innerText = 'Tác giả: ' + author;
+            document.getElementById('story-desc').innerText = desc;
+            document.getElementById('story-cover').src = cover;
+        }
 
+        function hideDetail() {
+            document.getElementById('library-view').style.display = 'block';
+            document.getElementById('detail-page').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
