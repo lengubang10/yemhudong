@@ -1,22 +1,40 @@
 /* ==========================================================================
-   1. ĐỔI CHẾ ĐỘ SÁNG / TỐI & CHUYỂN ĐỔI TRANG (PAGE)
+   1. ĐỔI CHẾ ĐỘ SÁNG / TỐI CHUẨN XỊN (ĐÃ FIX LỖI)
    ========================================================================== */
 const themeToggle = document.getElementById('theme-toggle');
-if (localStorage.getItem('theme') === 'dark') {
-    document.body.className = 'dark-mode';
-    if(themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+
+// Hàm kiểm tra trạng thái ban đầu để hiển thị icon mặt trăng/mặt trời tương ứng
+function initTheme() {
+    let savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        document.body.classList.add('dark-mode');
+        document.body.classList.remove('light-mode');
+        if(themeToggle) themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    } else {
+        document.body.classList.add('light-mode');
+        document.body.classList.remove('dark-mode');
+        if(themeToggle) themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+    }
 }
+initTheme(); // Chạy ngay khi tải trang
 
 if(themeToggle) {
     themeToggle.addEventListener('click', () => {
-        document.body.classList.toggle('dark-mode');
-        document.body.classList.toggle('light-mode');
-        let isDark = document.body.classList.contains('dark-mode');
-        themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
-        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        if (document.body.classList.contains('dark-mode')) {
+            document.body.classList.remove('dark-mode');
+            document.body.classList.add('light-mode');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            localStorage.setItem('theme', 'light');
+        } else {
+            document.body.classList.remove('light-mode');
+            document.body.classList.add('dark-mode');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            localStorage.setItem('theme', 'dark');
+        }
     });
 }
 
+// Chuyển đổi trang ẩn/hiện mượt mà
 function showPage(pageId) {
     document.querySelectorAll('.page-section').forEach(section => {
         section.classList.remove('active');
@@ -31,7 +49,7 @@ function openStory(title) {
 }
 
 /* ==========================================================================
-   2. TÌM KIẾM TRUYỆN & BỘ LỌC THỂ LOẠI (HỌC HỎI ĐỘNG CHĂN RÙA)
+   2. TÌM KIẾM TRUYỆN & BỘ LỌC
    ========================================================================== */
 const searchInput = document.getElementById('search-input');
 if(searchInput) {
@@ -108,17 +126,13 @@ function submitMainComment() {
 }
 
 /* ==========================================================================
-   5. ĐĂNG NHẬP / UP ẢNH AVATAR VÀ LƯU TRUYỆN (LOCALSTORAGE)
+   5. ĐĂNG NHẬP / UP ẢNH AVATAR VÀ LƯU TRUYỆN
    ========================================================================== */
 let isLoggedIn = false;
 let savedStories = [];
 
-function openAuthModal() {
-    document.getElementById('auth-modal').style.display = 'flex';
-}
-function closeAuthModal() {
-    document.getElementById('auth-modal').style.display = 'none';
-}
+function openAuthModal() { document.getElementById('auth-modal').style.display = 'flex'; }
+function closeAuthModal() { document.getElementById('auth-modal').style.display = 'none'; }
 
 function handleLogin() {
     let user = document.getElementById('username').value.trim();
@@ -143,16 +157,16 @@ function uploadAvatar(event) {
 function saveToLibrary() {
     let currentTitle = document.getElementById('current-story-title').innerText;
     if(!isLoggedIn) {
-        alert("Hãy bấm nút Đăng Nhập góc phải trước khi lưu tủ sách nha!");
+        alert("Hãy bấm nút Đăng Nhập trước khi lưu vào kho cá nhân nha!");
         openAuthModal();
         return;
     }
     if(!savedStories.includes(currentTitle)) {
         savedStories.push(currentTitle);
         renderSavedList();
-        alert(`Đã thêm truyện "${currentTitle}" vào kho lưu trữ cá nhân của bạn! ✨`);
+        alert(`Đã thêm truyện "${currentTitle}" vào tủ sách cá nhân thành công! ✨`);
     } else {
-        alert("Bộ truyện này đã có sẵn trong tủ sách của bạn rồi nè.");
+        alert("Bộ truyện này đã có sẵn trong tủ sách rồi nè.");
     }
 }
 
@@ -165,18 +179,18 @@ function renderSavedList() {
     box.innerHTML = "";
     savedStories.forEach(title => {
         let item = document.createElement('div');
-        item.style = "background:var(--primary-light); padding:10px; border-radius:10px; margin-bottom:8px; font-size:13px; font-weight:700; display:flex; justify-content:space-between; align-items:center;";
+        item.style = "background:var(--primary-light); color:#2a3544; padding:10px; border-radius:10px; margin-bottom:8px; font-size:13px; font-weight:700; display:flex; justify-content:space-between; align-items:center;";
         item.innerHTML = `<span>📖 ${title}</span><button class="btn-cute-sm" style="padding:4px 10px; font-size:11px;" onclick="closeAuthModal(); openStory('${title}')">Đọc tiếp</button>`;
         box.appendChild(item);
     });
 }
 
 /* ==========================================================================
-   6. BẢO MẬT CHỐNG SAO CHÉP (CHỐNG COPY ĐỘC QUYỀN TRUYỆN)
+   6. BẢO MẬT CHỐNG SAO CHÉP (CHỐNG COPY)
    ========================================================================== */
 document.addEventListener('keydown', function(e) {
     if (e.ctrlKey && (e.key === 'c' || e.key === 'u' || e.key === 's' || e.key === 'p') || e.key === 'F12') {
         e.preventDefault();
-        alert("Truyện độc quyền tại Yểm Hử Đông - Xin vui lòng đừng sao chép đi nơi khác nha! 😉");
+        alert("Truyện độc quyền tại Yểm Hử Đông - Xin vui lòng không sao chép nha! 😉");
     }
 });
