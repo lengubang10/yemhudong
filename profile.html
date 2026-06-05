@@ -10,82 +10,88 @@
             --input-bg: #1e1e24;
             --neon-pink: #FF007F;
             --text-light: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f4f7f6; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f4f7f6; margin: 0; }
 
-        /* Header */
-        header { background: var(--primary); padding: 20px; color: white; display: flex; justify-content: space-between; align-items: center; }
-        .btn-auth { cursor: pointer; background: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; color: var(--primary); }
+        /* --- Header --- */
+        header { background: var(--primary); padding: 20px 50px; display: flex; justify-content: space-between; align-items: center; color: white; }
+        .logo { font-weight: bold; font-size: 1.5em; letter-spacing: 1px; }
 
-        /* Profile */
-        .profile-card { max-width: 600px; margin: 50px auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 5px solid var(--primary); text-align: center; }
-        .avatar { width: 120px; height: 120px; background: var(--primary); border-radius: 50%; margin: 0 auto 15px; }
+        /* --- Modal Chi tiết --- */
+        .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 1000; justify-content: center; align-items: center; }
+        .modal-content { background: var(--dark-bg); padding: 40px; width: 350px; border-radius: 20px; color: white; border: 1px solid #333; position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+        
+        /* Input & Button Detail */
+        input { width: 100%; padding: 12px; margin: 8px 0; background: var(--input-bg); border: 1px solid #444; color: white; border-radius: 8px; transition: var(--transition); }
+        input:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 8px rgba(143, 189, 244, 0.3); }
+        
+        .btn-neon { 
+            background: linear-gradient(45deg, var(--neon-pink), #ff5a9d); 
+            border: none; padding: 14px; width: 100%; cursor: pointer; color: white; 
+            font-weight: 700; border-radius: 8px; margin-top: 20px;
+            transition: var(--transition); text-transform: uppercase; letter-spacing: 1px;
+        }
+        .btn-neon:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 0, 127, 0.4); }
 
-        /* Modal Dark Mode */
-        .modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
-        .modal-content { background: var(--dark-bg); padding: 40px; width: 320px; border-radius: 15px; color: white; text-align: center; border: 1px solid #333; }
-        .modal-content input { width: 100%; padding: 12px; margin: 10px 0; background: var(--input-bg); border: 1px solid #444; color: white; border-radius: 5px; box-sizing: border-box; }
-        .btn-pink { background: var(--neon-pink); color: white; border: none; padding: 12px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; margin-top: 10px; }
-        .link { font-size: 0.85em; color: var(--primary); cursor: pointer; margin-top: 15px; display: inline-block; }
+        /* Trạng thái Loading */
+        .spinner { width: 20px; height: 20px; border: 3px solid rgba(255,255,255,0.3); border-top: 3px solid var(--neon-pink); border-radius: 50%; animation: spin 1s linear infinite; margin: 10px auto; display: none; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>Yểm Hử Đông</h1>
-    <button class="btn-auth" onclick="showModal('login')">Đăng nhập</button>
+    <div class="logo">YỂM HỬ ĐÔNG</div>
+    <button onclick="showStep('login')" style="padding: 8px 20px; cursor:pointer;">Đăng nhập</button>
 </header>
 
-<div class="profile-card">
-    <div class="avatar"></div>
-    <h2>Yểm Hử Đông</h2>
-    <p>Người đồng hành trí tuệ của bạn.</p>
-</div>
-
-<!-- Modal -->
 <div id="modal" class="modal">
     <div class="modal-content">
-        <!-- Login Form -->
-        <div id="login-form">
+        <!-- Form Đăng nhập -->
+        <div id="step-login">
             <h2>Đăng nhập</h2>
-            <input type="text" placeholder="Tên đăng nhập">
+            <input type="text" placeholder="Tên người dùng">
             <input type="password" placeholder="Mật khẩu">
-            <label style="display:block; font-size: 0.8em; text-align: left; color: #888;">
-                <input type="checkbox"> Ghi nhớ đăng nhập
-            </label>
-            <button class="btn-pink">ĐĂNG NHẬP</button>
-            <p class="link" onclick="showModal('forgot')">Quên mật khẩu?</p>
+            <label><input type="checkbox"> Nhớ đăng nhập</label>
+            <button class="btn-neon" onclick="handleAuth()">Đăng nhập</button>
+            <p onclick="showStep('forgot')" style="font-size: 0.8em; color: var(--primary); cursor: pointer; margin-top: 15px;">Quên mật khẩu?</p>
         </div>
 
-        <!-- Forgot Password Form -->
-        <div id="forgot-form" class="hidden">
-            <h2>Khôi phục mật khẩu</h2>
+        <!-- Form Quên mật khẩu -->
+        <div id="step-forgot" class="hidden">
+            <h2>Khôi phục</h2>
             <input type="email" placeholder="Nhập email của bạn">
-            <button class="btn-pink" onclick="showModal('verify')">GỬI MÃ XÁC NHẬN</button>
+            <button class="btn-neon" onclick="handleLoading()">Gửi mã xác nhận</button>
+            <p onclick="showStep('login')" style="cursor: pointer; color: #888; margin-top: 15px;">« Quay lại</p>
         </div>
 
-        <!-- Verify Code Form -->
-        <div id="verify-form" class="hidden">
-            <h2>Xác thực</h2>
-            <input type="text" placeholder="Nhập mã 6 chữ số">
-            <button class="btn-pink">XÁC MINH</button>
+        <!-- Loading & Status -->
+        <div id="step-loading" class="hidden" style="text-align: center;">
+            <div class="spinner" style="display: block;"></div>
+            <p>Đang gửi mã...</p>
         </div>
-
-        <p class="link" onclick="closeModal()">Đóng</p>
     </div>
 </div>
 
 <script>
-    function showModal(type) {
+    function showStep(step) {
+        document.getElementById('step-login').classList.add('hidden');
+        document.getElementById('step-forgot').classList.add('hidden');
+        document.getElementById('step-loading').classList.add('hidden');
         document.getElementById('modal').style.display = 'flex';
-        document.getElementById('login-form').classList.add('hidden');
-        document.getElementById('forgot-form').classList.add('hidden');
-        document.getElementById('verify-form').classList.add('hidden');
-        document.getElementById(type + '-form').classList.remove('hidden');
+        document.getElementById('step-' + step).classList.remove('hidden');
     }
-    function closeModal() { document.getElementById('modal').style.display = 'none'; }
+
+    function handleLoading() {
+        showStep('loading');
+        setTimeout(() => { alert("Mã xác nhận đã được gửi tới email của bạn!"); showStep('login'); }, 2000);
+    }
+    
+    function handleAuth() { alert("Đang xử lý đăng nhập..."); }
 </script>
 
 </body>
