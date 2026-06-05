@@ -8,31 +8,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
+<!-- Mặc định gán sẵn lớp light-mode ở đây để CSS nhận diện không bị lỗi -->
 <body class="light-mode">
 
+    <!-- 1. THANH MENU TRÊN CÙNG ( NAVBAR ) -->
     <nav class="navbar">
         <div class="nav-container">
+            <!-- Menu bên trái chỉ giữ lại Liên hệ, đã xóa Thể loại và Trạng thái -->
             <div class="nav-left">
                 <div class="dropdown">
-                    <button class="dropbtn">Thể loại <i class="fas fa-chevron-down"></i></button>
+                    <button class="dropbtn">Liên hệ <i class="fas fa-chevron-down"></i></button>
                     <div class="dropdown-content">
-                        <a href="#" onclick="filterGenre('Danmei')">Danmei</a>
-                        <a href="#" onclick="filterGenre('Fantasy')">Fantasy</a>
-                        <a href="#" onclick="filterGenre('Cổ Phong')">Cổ Phong</a>
-                        <a href="#" onclick="filterGenre('Hiện Đại')">Hiện Đại</a>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn">Trạng thái <i class="fas fa-chevron-down"></i></button>
-                    <div class="dropdown-content">
-                        <a href="#">Đang tiến hành</a>
-                        <a href="#">Hoàn thành</a>
+                        <a href="#">Facebook</a>
+                        <a href="#">Chính sách</a>
                     </div>
                 </div>
             </div>
 
+            <!-- Tên Web chính giữa -->
             <div class="logo" onclick="showPage('home-section')">🌿 YỂM HỬ ĐÔNG 🌿</div>
 
+            <!-- Cụm chức năng bên phải -->
             <div class="nav-right">
                 <button class="btn-bell" onclick="alert('Không có thông báo mới nào~')">
                     <i class="fas fa-bell"></i>
@@ -46,22 +42,28 @@
         </div>
     </nav>
 
+    <!-- 2. THANH CHẠY CHỮ THÔNG BÁO (Loa màu xanh dương #8FBDF4) -->
     <div class="announcement-banner">
         <div class="announcement-tag"><i class="fas fa-bullhorn"></i> THÔNG BÁO</div>
         <div class="announcement-text">
             <marquee behavior="scroll" direction="left" scrollamount="5">
-                Chào mừng bạn đến với Yểm Hử Đông! Web truyện tông xanh dương siêu cấp đáng yêu. Chúc các bạn có những giây phút đọc truyện thật vui vẻ ngọt ngào nhé~
+                Xin chào những dấu chân vô tình dừng lại trước bậu cửa nhuốm màu thời gian của Yểm Hử Đông.
             </marquee>
         </div>
     </div>
 
+    <!-- ==========================================
+         PHẦN A: GIAO DIỆN TRANG CHỦ (HOME)
+         ========================================== -->
     <section id="home-section" class="page-section active">
+        <!-- Ô Tìm kiếm to rõ ràng -->
         <div class="hero-search">
             <div class="search-box">
                 <i class="fas fa-search"></i>
                 <input type="text" id="search-input" placeholder="Nhập tên truyện hoặc thể loại cần tìm...">
             </div>
             
+            <!-- Bộ lọc tag nhanh giữ lại dưới này để tìm kiếm tiện hơn -->
             <div class="tags-scroll">
                 <span class="tag active" onclick="filterGenre('all')">Tất cả</span>
                 <span class="tag" onclick="filterGenre('Danmei')">Danmei</span>
@@ -71,9 +73,11 @@
             </div>
         </div>
 
+        <!-- Danh sách truyện chia ô lưới ngăn nắp -->
         <main class="main-content">
             <h3 class="section-title"><i class="fas fa-star" style="color: #f1c40f;"></i> Danh Sách Truyện Đề Cử</h3>
             <div class="story-grid">
+                <!-- Truyện 1 -->
                 <div class="story-card" data-genre="Fantasy ABO" onclick="openStory('Yểm Hử Đông Truyện Ký')">
                     <div class="card-cover">
                         <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?q=80&w=400" alt="Bìa">
@@ -85,6 +89,7 @@
                         <span class="mini-tag">Fantasy</span>
                     </div>
                 </div>
+                <!-- Truyện 2 -->
                 <div class="story-card" data-genre="Danmei Hiện Đại" onclick="openStory('Tình Yêu Màu Xanh Pastel')">
                     <div class="card-cover">
                         <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=400" alt="Bìa">
@@ -100,6 +105,9 @@
         </main>
     </section>
 
+    <!-- ==========================================
+         PHẦN B: GIAO DIỆN ĐỌC TRUYỆN (READING)
+         ========================================== -->
     <section id="reading-section" class="page-section">
         <div class="toolbar">
             <button class="tool-btn" onclick="changeFontSize(-2)">A-</button>
@@ -140,18 +148,21 @@
                     <div class="c-avatar">🌸</div>
                     <div class="c-info">
                         <h5>Thỏ Con Mê Truyện</h5>
-                        <p>Ui chu choa truyện dễ thương xỉu lên xỉu xuống luôn á, hóng chương tiếp theo ghê!</p>
+                        <p>Ui chu choa truyện dễ thương xỉu lên xỉu xuống luôn á!</p>
                     </div>
                 </div>
             </div>
         </section>
     </section>
 
+    <!-- ==========================================
+         PHẦN C: CỬA SỔ MODAL ĐĂNG NHẬP / HỒ SƠ
+         ========================================== -->
     <div class="modal" id="auth-modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeAuthModal()">&times;</span>
             <div id="auth-form-box">
-                <h3 style="color: var(--primary); text-align: center;">🌿 THÀNH VIÊN ĐÔNG CUTE 🌿</h3>
+                <h3 style="color: var(--primary); text-align: center; margin-top: 0;">🌿 THÀNH VIÊN ĐÔNG CUTE 🌿</h3>
                 <div class="input-group">
                     <input type="text" id="username" placeholder="Tên tài khoản...">
                 </div>
@@ -172,7 +183,7 @@
                     <p style="font-size:12px; color:#aaa; margin:0;">Thành viên của gia đình Yểm Hử Đông</p>
                 </div>
                 <hr style="border:0; border-top:1px dashed var(--primary); margin:15px 0;">
-                <h4><i class="fas fa-folder-heart" style="color:var(--primary)"></i> Kho Truyện Đang Lưu</h4>
+                <h4 class="profile-saved-title"><i class="fas fa-folder-heart"></i> Kho Truyện Đang Lưu</h4>
                 <div class="saved-list" id="saved-list-box">
                     <p style="font-size:13px; color:#888;">Chưa có truyện nào được lưu cả~</p>
                 </div>
